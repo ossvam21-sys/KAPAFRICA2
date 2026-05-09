@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Clock, MapPin, Phone, Instagram, MessageCircle, CheckCircle } from "lucide-react";
 import pattern from "@assets/generated_images/dark_luxury_abstract_african_pattern_with_gold_accents.png";
-import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 const TikTokIcon = ({ className }: { className?: string }) => (
@@ -33,53 +32,31 @@ export function InfoSection() {
     message: ""
   });
 
-  const createReservationMutation = useMutation({
-    mutationFn: async (data: typeof formData) => {
-      const response = await fetch("/api/reservations", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error || "Erreur lors de la réservation");
-      }
-
-      return response.json();
-    },
-    onSuccess: () => {
-      toast.success("Demande de réservation envoyée avec succès !", {
-        description: "Nous vous contacterons bientôt pour confirmer votre réservation.",
-        duration: 5000,
-      });
-      setFormData({
-        date: "",
-        guests: 2,
-        name: "",
-        email: "",
-        phone: "",
-        message: ""
-      });
-    },
-    onError: (error: Error) => {
-      toast.error("Erreur", {
-        description: error.message,
-      });
-    },
-  });
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.date) {
       toast.error("Veuillez sélectionner une date");
       return;
     }
 
-    createReservationMutation.mutate(formData);
+    const msg = [
+      `Bonjour Kapafrica, je souhaite réserver une table.`,
+      `📅 Date : ${formData.date}`,
+      `👥 Personnes : ${formData.guests}`,
+      formData.name ? `👤 Nom : ${formData.name}` : "",
+      formData.phone ? `📞 Tél : ${formData.phone}` : "",
+      formData.email ? `✉️ Email : ${formData.email}` : "",
+      formData.message ? `💬 Message : ${formData.message}` : "",
+    ].filter(Boolean).join("\n");
+
+    const waUrl = `https://wa.me/32478576613?text=${encodeURIComponent(msg)}`;
+    window.open(waUrl, "_blank");
+
+    toast.success("Redirection vers WhatsApp…", {
+      description: "Envoyez le message pré-rempli pour confirmer votre réservation.",
+      duration: 4000,
+    });
   };
 
   return (
@@ -211,10 +188,9 @@ export function InfoSection() {
                
                <Button 
                  type="submit"
-                 disabled={createReservationMutation.isPending}
-                 className="w-full bg-primary text-black hover:bg-white rounded-none uppercase tracking-widest py-6 transition-colors duration-300 disabled:opacity-50"
+                 className="w-full bg-primary text-black hover:bg-white rounded-none uppercase tracking-widest py-6 transition-colors duration-300"
                >
-                 {createReservationMutation.isPending ? "Envoi en cours..." : "Confirmer la demande"}
+                 Réserver via WhatsApp
                </Button>
             </form>
           </div>
