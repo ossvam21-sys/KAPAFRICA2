@@ -88,6 +88,9 @@ export function InfoSection() {
                   <div className="flex justify-between"><span>Samedi</span> <span>18h - 23h</span></div>
                   <div className="flex justify-between"><span>Dimanche</span> <span>12h - 22h</span></div>
                   <div className="text-white/40 italic mt-2 sm:col-span-2">Fermé le Lundi</div>
+                  <div className="sm:col-span-2 mt-3 border border-primary/20 bg-primary/5 px-4 py-3 text-xs text-white/70 leading-relaxed">
+                    <span className="text-primary font-semibold">Ouverture à midi possible</span> — à partir de <span className="text-white">6 personnes</span>, sur réservation uniquement.
+                  </div>
                 </div>
               </div>
 
