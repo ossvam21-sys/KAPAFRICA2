@@ -82,11 +82,11 @@ export function InfoSection() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-white/80 font-light">
                   <div className="flex justify-between"><span>Mardi</span> <span>18h30 - 22h</span></div>
-                  <div className="flex justify-between"><span>Mercredi</span> <span>12h-14h & 18h30-22h</span></div>
-                  <div className="flex justify-between"><span>Jeudi</span> <span>12h-14h & 18h30-22h</span></div>
-                  <div className="flex justify-between"><span>Vendredi</span> <span>12h-14h & 18h30-22h</span></div>
+                  <div className="flex justify-between"><span>Mercredi</span> <span>18h30 - 22h</span></div>
+                  <div className="flex justify-between"><span>Jeudi</span> <span>18h30 - 22h</span></div>
+                  <div className="flex justify-between"><span>Vendredi</span> <span>18h30 - 22h</span></div>
                   <div className="flex justify-between"><span>Samedi</span> <span>18h30 - 23h</span></div>
-                  <div className="flex justify-between"><span>Dimanche</span> <span>12h - 21h</span></div>
+                  <div className="flex justify-between"><span>Dimanche</span> <span>14h - 21h</span></div>
                   <div className="text-white/40 italic mt-2 sm:col-span-2">Fermé le Lundi</div>
                 </div>
               </div>
